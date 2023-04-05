@@ -8,15 +8,27 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ChatList from "./screens/ChatList";
+import Chat from "./screens/Chat";
+import SignIn from "./screens/SignIn";
+import SignUp from "./screens/SignUp";
+import Settings from "./screens/Settings";
 
 const Stack = createNativeStackNavigator();
+const Tabs = createBottomTabNavigator();
+
+const TabsNavigator = () => {
+  <Tabs.Navigator>
+    <Tabs.Screen name="ChatList" component={ChatList} />
+    <Tabs.Screen name="Settings" component={Settings} />
+  </Tabs.Navigator>;
+};
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Main" component={TabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
