@@ -13,6 +13,7 @@ import Chat from "./screens/Chat";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import Settings from "./screens/Settings";
+import { Provider } from "react-native-paper";
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -41,24 +42,26 @@ const TabsNavigator = () => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Main"
-          component={TabsNavigator}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{ presentation: "fullScreenModal" }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-          options={{ presentation: "fullScreenModal" }}
-        />
-      </Stack.Navigator>
+      <Provider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Main"
+            component={TabsNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Chat" component={Chat} />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{ presentation: "fullScreenModal" }}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{ presentation: "fullScreenModal" }}
+          />
+        </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 };

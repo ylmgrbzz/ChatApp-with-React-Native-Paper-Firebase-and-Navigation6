@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/core";
 
 const ChatList = () => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <List.Item
         title="ylmgrbz"
         description="Hello"
@@ -36,6 +36,10 @@ const ChatList = () => {
         title="ylmgrbz"
         description="Hello"
         left={() => <Avatar.Text label="YL" size={56} />}
+      />
+      <FAB
+        icon="plus"
+        style={{ position: "absolute", bottom: 16, right: 16 }}
       />
     </View>
   );
