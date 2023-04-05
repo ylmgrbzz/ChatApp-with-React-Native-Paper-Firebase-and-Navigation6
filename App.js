@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import { Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 // import { Provider, DefaultTheme } from "react-native-paper";
 // import firebase from "firebase/app";
 // import "firebase/auth";
@@ -19,7 +19,19 @@ const Tabs = createBottomTabNavigator();
 
 const TabsNavigator = () => {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          return (
+            <Ionicons
+              name={route.name === "ChatList" ? "chatbubbles" : "settings"}
+              color={color}
+              size={size}
+            />
+          );
+        },
+      })}
+    >
       <Tabs.Screen name="ChatList" component={ChatList} />
       <Tabs.Screen name="Settings" component={Settings} />
     </Tabs.Navigator>
@@ -30,7 +42,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={TabsNavigator} />
+        <Stack.Screen
+          name="Main"
+          component={TabsNavigator}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
