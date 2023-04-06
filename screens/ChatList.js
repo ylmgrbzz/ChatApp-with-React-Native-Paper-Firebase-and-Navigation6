@@ -17,6 +17,8 @@ const ChatList = () => {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -26,12 +28,16 @@ const ChatList = () => {
 
   const createChat = async () => {
     if (!email || !userEmail) return;
+    setIsLoading(true);
     firebase
       .firestore()
       .collection("chats")
       .add({
         users: [email, userEmail],
       });
+    setIsLoading(false);
+    setIsDialogVisible(false);
+    navigation.navigate("Chat");
   };
 
   return (
@@ -56,7 +62,9 @@ const ChatList = () => {
             />
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={() => createChat()}>Save</Button>
+            <Button onPress={() => createChat()} loading={isLoading}>
+              Save
+            </Button>
             <Button onPress={() => setIsDialogVisible(false)}>Cancel</Button>
           </Dialog.Actions>
         </Dialog>
