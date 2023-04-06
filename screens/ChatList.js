@@ -14,6 +14,8 @@ import {
 import { useNavigation } from "@react-navigation/core";
 
 const ChatList = () => {
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
+
   return (
     <View style={{ flex: 1 }}>
       <List.Item
@@ -23,17 +25,28 @@ const ChatList = () => {
       />
       <Divider inset style={{ backgroundColor: "red" }} />
       <Portal>
-        <Dialog visible={true}>
+        <Dialog
+          visible={isDialogVisible}
+          onDismiss={() => setIsDialogVisible(false)}
+        >
           <Dialog.Title>New Chat</Dialog.Title>
-          <Dialog.Content></Dialog.Content>
+          <Dialog.Content>
+            <TextInput
+              label="Enter user email"
+              // value={userEmail}
+              // onChangeText={(text) => setUserEmail(text)}
+            />
+          </Dialog.Content>
           <Dialog.Actions>
-            <Button>Cancel</Button>
+            <Button>Save</Button>
+            <Button onPress={() => setIsDialogVisible(false)}>Cancel</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
       <FAB
         icon="plus"
         style={{ position: "absolute", bottom: 16, right: 16 }}
+        onPress={() => setIsDialogVisible(true)}
       />
     </View>
   );
