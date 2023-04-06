@@ -10,11 +10,29 @@ import {
   Button,
   TextInput,
 } from "react-native-paper";
-// import firebase from "firebase/app";
+import firebase from "firebase/app";
 import { useNavigation } from "@react-navigation/core";
 
 const ChatList = () => {
   const [isDialogVisible, setIsDialogVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      setEmail(user?.email ?? "");
+    });
+  }, []);
+
+  const createChat = async () => {
+    if (!email || !userEmail) return;
+    firebase
+      .firestore()
+      .collection("chats")
+      .add({
+        users: [email, userEmail],
+      });
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -23,7 +41,7 @@ const ChatList = () => {
         description="Hello"
         left={() => <Avatar.Text label="YL" size={56} />}
       />
-      <Divider inset  />
+      <Divider inset />
       <Portal>
         <Dialog
           visible={isDialogVisible}
@@ -33,12 +51,12 @@ const ChatList = () => {
           <Dialog.Content>
             <TextInput
               label="Enter user email"
-              // value={userEmail}
-              // onChangeText={(text) => setUserEmail(text)}
+              value={userEmail}
+              onChangeText={(text) => setUserEmail(text)}
             />
           </Dialog.Content>
           <Dialog.Actions>
-            <Button>Save</Button>
+            <Button onPress={() => createChat()}>Save</Button>
             <Button onPress={() => setIsDialogVisible(false)}>Cancel</Button>
           </Dialog.Actions>
         </Dialog>
