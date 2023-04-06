@@ -20,13 +20,12 @@ const SignUp = () => {
         .auth()
         .createUserWithEmailAndPassword(email, password);
       await response.user.updateProfile({ displayName: name });
-      // navigation.popToTop();
-      setIsLoading(false);
+      navigation.popToTop();
     } catch (error) {
       console.log(error);
       setIsLoading(false);
-      alert(error.message);
-      // setError(error.message);
+      // alert(error.message);
+      setError(error.message);
     }
   };
 

@@ -19,11 +19,11 @@ const ChatList = () => {
   return (
     <View style={{ flex: 1 }}>
       <List.Item
-        title="ylmgrbz"
+        title="ylmgrbzz"
         description="Hello"
         left={() => <Avatar.Text label="YL" size={56} />}
       />
-      <Divider inset style={{ backgroundColor: "red" }} />
+      <Divider inset  />
       <Portal>
         <Dialog
           visible={isDialogVisible}
