@@ -29,7 +29,7 @@ const ChatList = () => {
   const createChat = async () => {
     if (!email || !userEmail) return;
     setIsLoading(true);
-    firebase
+    const response = await firebase
       .firestore()
       .collection("chats")
       .add({
@@ -37,7 +37,7 @@ const ChatList = () => {
       });
     setIsLoading(false);
     setIsDialogVisible(false);
-    navigation.navigate("Chat");
+    navigation.navigate("Chat", { chatId: response.id });
   };
 
   const [chats, setChats] = useState([]);
@@ -56,7 +56,8 @@ const ChatList = () => {
         <React.Fragment key={chat.id}>
           <List.Item
             title={chat.data().users.find((x) => x !== email)}
-            description={(chat.data().messages ?? [])[0]?.text ?? undefined}
+            // description={(chat.data().messages ?? [])[0]?.text ?? undefined}
+            description="No messages yet"
             left={() => (
               <Avatar.Text
                 label={chat
