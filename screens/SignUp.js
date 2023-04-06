@@ -1,13 +1,26 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { TextInput, Button, Subheading } from "react-native-paper";
-// import firebase from "firebase/app";
+import firebase from "firebase/app";
 import { useNavigation } from "@react-navigation/core";
 
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const createAccount = async () => {
+    setIsLoading(true);
+    try {
+      const response = await firebase.auth().createUserWithEmailAndPassword(email, password) 
+      await response.user.updateProfile({ displayName: name });
+      navigation.popToTop();
+    } catch (error) {
+      setError(error.message);
+      setIsLoading(false);
+    }
+  }
+
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");

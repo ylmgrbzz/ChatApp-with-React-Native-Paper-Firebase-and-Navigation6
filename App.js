@@ -3,18 +3,26 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-// import { Provider, DefaultTheme } from "react-native-paper";
-// import firebase from "firebase/app";
-// import "firebase/auth";
-// import "firebase/firestore";
+import { Provider, DefaultTheme } from "react-native-paper";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ChatList from "./screens/ChatList";
 import Chat from "./screens/Chat";
 import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import Settings from "./screens/Settings";
-import { Provider } from "react-native-paper";
 import React, { useEffect } from "react";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC6VxbHo39CXDD5R8h8huq4xvB6-oF9WyA",
+  authDomain: "chat-app-673dc.firebaseapp.com",
+  projectId: "chat-app-673dc",
+  storageBucket: "chat-app-673dc.appspot.com",
+  messagingSenderId: "962453904918",
+  appId: "1:962453904918:web:e42f4578fb40068731df37",
+};
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
