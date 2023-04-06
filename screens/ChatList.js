@@ -22,21 +22,15 @@ const ChatList = () => {
         left={() => <Avatar.Text label="YL" size={56} />}
       />
       <Divider inset style={{ backgroundColor: "red" }} />
-      <List.Item
-        title="ylmgrbz"
-        description="Hello"
-        left={() => <Avatar.Text label="YL" size={56} />}
-      />
-      <List.Item
-        title="ylmgrbz"
-        description="Hello"
-        left={() => <Avatar.Text label="YL" size={56} />}
-      />
-      <List.Item
-        title="ylmgrbz"
-        description="Hello"
-        left={() => <Avatar.Text label="YL" size={56} />}
-      />
+      <Portal>
+        <Dialog visible={true}>
+          <Dialog.Title>New Chat</Dialog.Title>
+          <Dialog.Content></Dialog.Content>
+          <Dialog.Actions>
+            <Button>Cancel</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
       <FAB
         icon="plus"
         style={{ position: "absolute", bottom: 16, right: 16 }}
