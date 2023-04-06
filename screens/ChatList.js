@@ -52,12 +52,26 @@ const ChatList = () => {
   }, [email]);
   return (
     <View style={{ flex: 1 }}>
-      <List.Item
-        title="ylmgrbzz"
-        description="Hello"
-        left={() => <Avatar.Text label="YL" size={56} />}
-      />
-      <Divider inset />
+      {chats.map((chat) => (
+        <React.Fragment key={chat.id}>
+          <List.Item
+            title={chat.data().users.find((x) => x !== email)}
+            description={(chat.data().messages ?? [])[0]?.text ?? undefined}
+            left={() => (
+              <Avatar.Text
+                label={chat
+                  .data()
+                  .users.find((x) => x !== email)
+                  .split(" ")
+                  .reduce((prev, current) => prev + current[0], "")}
+                size={56}
+              />
+            )}
+            onPress={() => navigation.navigate("Chat", { chatId: chat.id })}
+          />
+          <Divider inset />
+        </React.Fragment>
+      ))}
       <Portal>
         <Dialog
           visible={isDialogVisible}
