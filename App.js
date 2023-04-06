@@ -22,7 +22,7 @@ const firebaseConfig = {
   projectId: "chat-app-5e5a4",
   storageBucket: "chat-app-5e5a4.appspot.com",
   messagingSenderId: "1017412214539",
-  appId: "1:1017412214539:web:269e306ab155fc57eb8c0e"
+  appId: "1:1017412214539:web:269e306ab155fc57eb8c0e",
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -32,7 +32,7 @@ const Tabs = createBottomTabNavigator();
 
 const TabsNavigator = () => {
   const navigation = useNavigation();
-   useEffect(() => {
+  useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         navigation.navigate("SignUp");
@@ -60,10 +60,20 @@ const TabsNavigator = () => {
   );
 };
 
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#2196f3",
+    accent: "#e91e63",
+  },
+};
+
 const App = () => {
   return (
     <NavigationContainer>
-      <Provider>
+      <Provider theme={theme}>
         <StatusBar style="dark" />
         <Stack.Navigator>
           <Stack.Screen
