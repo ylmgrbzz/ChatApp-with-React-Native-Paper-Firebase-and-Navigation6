@@ -40,6 +40,16 @@ const ChatList = () => {
     navigation.navigate("Chat");
   };
 
+  const [chats, setChats] = useState([]);
+  useEffect(() => {
+    return firebase
+      .firestore()
+      .collection("chats")
+      .where("users", "array-contains", email)
+      .onSnapshot((querySnapshot) => {
+        setChats(querySnapshot.docs);
+      });
+  }, [email]);
   return (
     <View style={{ flex: 1 }}>
       <List.Item
