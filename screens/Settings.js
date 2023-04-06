@@ -6,6 +6,7 @@ import firebase from "firebase/app";
 const Settings = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
   return (
     <View style={{ alignItems: "center", marginTop: 16 }}>
       <Avatar.Text label="YL" size={56} />

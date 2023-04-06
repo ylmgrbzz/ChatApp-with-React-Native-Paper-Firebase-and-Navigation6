@@ -4,8 +4,6 @@ import { TextInput, Button, Subheading } from "react-native-paper";
 import firebase from "firebase/app";
 import { useNavigation } from "@react-navigation/core";
 
-
-
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
