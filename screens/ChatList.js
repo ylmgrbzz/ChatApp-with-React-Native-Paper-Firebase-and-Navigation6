@@ -56,8 +56,8 @@ const ChatList = () => {
         <React.Fragment key={chat.id}>
           <List.Item
             title={chat.data().users.find((x) => x !== email)}
-            // description={(chat.data().messages ?? [])[0]?.text ?? undefined}
-            description="No messages yet"
+            description={(chat.data().messages ?? [])[0]?.text ?? undefined}
+            // description="No messages yet"
             left={() => (
               <Avatar.Text
                 label={chat
