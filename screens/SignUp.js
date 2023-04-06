@@ -4,26 +4,31 @@ import { TextInput, Button, Subheading } from "react-native-paper";
 import firebase from "firebase/app";
 import { useNavigation } from "@react-navigation/core";
 
+
+
 const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const createAccount = async () => {
     setIsLoading(true);
     try {
-      const response = await firebase.auth().createUserWithEmailAndPassword(email, password) 
+      const response = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
       await response.user.updateProfile({ displayName: name });
-      navigation.popToTop();
-    } catch (error) {
-      setError(error.message);
+      // navigation.popToTop();
       setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      alert(error.message);
+      // setError(error.message);
     }
-  }
-
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  };
 
   const navigation = useNavigation();
   return (
