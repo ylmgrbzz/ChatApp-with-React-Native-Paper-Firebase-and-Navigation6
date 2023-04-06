@@ -14,11 +14,20 @@ import SignIn from "./screens/SignIn";
 import SignUp from "./screens/SignUp";
 import Settings from "./screens/Settings";
 import { Provider } from "react-native-paper";
+import React, { useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
 const TabsNavigator = () => {
+  const navigation = useNavigation();
+  useEffect(() => {
+    const isLoggedIn = false;
+    if (!isLoggedIn) {
+      navigation.navigate("SignUp");
+    }
+  }, []);
+
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
@@ -43,6 +52,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Provider>
+        <StatusBar style="dark" />
         <Stack.Navigator>
           <Stack.Screen
             name="Main"
